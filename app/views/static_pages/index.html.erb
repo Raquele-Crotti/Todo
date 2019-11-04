@@ -1,6 +1,9 @@
 <section class="todoapp">
   <header class="header">
     <h1>todos</h1>
+    <form id="new-form"> 
+      <input type="text" class="new-todo" /> 
+    </form>
   </header>
 
   <section class="main">
@@ -11,7 +14,14 @@
 </section>
 
 <script>
-  $(function() {
+  $(function() { //when page loads, use jQuery to find HTML element of new-form. Register a callback to happen when the form is submitted. Use jQuery's preventDeafult method to stop default behavior of erloading the page on form submission. Log message to the console.
+    $('#new-form').submit(function(event) {
+      event.preventDefault();
+      var textbox = $('.new-todo'); //use jQuery with the class of new-todo to extract value from textbox. Check value using jQuery's val method.
+      console.log("Task: ", textbox.val());
+    });
+
+
     // The taskHtml method takes in a JavaScript representation
     // of the task and produces an HTML representation using
     // <li> tags
