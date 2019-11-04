@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    render json: Task.all #load tasks from database in JSON format (not HTML)
+    render json: Task.order(:id) #load tasks from database in JSON format (not HTML) and in the oder in which they were created
   end
 
   def update
