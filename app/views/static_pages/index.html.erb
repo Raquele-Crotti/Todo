@@ -12,37 +12,50 @@
 
 <script>
   $(function() {
+    // The taskHtml method takes in a JavaScript representation
+    // of the task and produces an HTML representation using
+    // <li> tags
+    function taskHtml(task) {
+      var checkedStatus = task.done ? "checked" : "";
+      var liElement = '<li><div class="view"><input class="toggle" type="checkbox"' +
+        " data-id='" + task.id + "'" +
+        checkedStatus +
+        '><label>' +
+         task.title +
+         '</label></div></li>';
+
+      return liElement;
+    }
+
+    // toggleTask takes in an HTML representation of the
+    // an event that fires from an HTML representation of
+    // the toggle checkbox and  performs an API request to toggle
+    // the value of the `done` field
+    function toggleTask(e) {
+      var itemId = $(e.target).data("id");
+
+
+      var doneValue = Boolean($(e.target).is(':checked'));
+
+
+      $.post("/tasks/" + itemId, {
+        _method: "PUT",
+        task: {
+          done: doneValue
+        }
+      });
+    }
+
     $.get("/tasks").success( function( data ) {
       var htmlString = "";
 
       $.each(data, function(index,  task) {
-        var checkedStatus = task.done ? "checked" : "";
-        var liElement = '<li><div class="view"><input class="toggle" type="checkbox"' +
-        " data-id='" + task.id + "'" + //Add data-id property to the checkbox input
-        checkedStatus +
-        '><label>' + 
-         task.title +
-         '</label></div></li>';
-        htmlString += liElement;
+        htmlString += taskHtml(task);
       });
-      var ulTodos = $('.todo-list'); //extract DOM element with the class of todo from page
-      ulTodos.html(htmlString); //take html string and push it inot html element
-    
-      $('.toggle').change(function(e){
-        var itemId = $(e.target).data("id"); //have jQuery extract data-id
-        console.log(itemId); //click handler to log message to the console when checkbox is toggled
-      
-        var doneValue = Boolean($(e.target).is(':checked'));
-        console.log("done:", doneValue);
+      var ulTodos = $('.todo-list');
+      ulTodos.html(htmlString);
 
-        $.post("/tasks/" + itemId, { //save checked/unchecked boxes in our database
-          _method: "PUT",
-          task: {
-            done: doneValue
-          }
-        });
-
-      });
+      $('.toggle').change(toggleTask);
 
     });
   });
