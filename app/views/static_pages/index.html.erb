@@ -18,6 +18,7 @@
       $.each(data, function(index,  task) {
         var checkedStatus = task.done ? "checked" : "";
         var liElement = '<li><div class="view"><input class="toggle" type="checkbox"' +
+        " data-id='" + task.id + "'" + //Add data-id property to the checkbox input
         checkedStatus +
         '><label>' + 
          task.title +
@@ -26,6 +27,23 @@
       });
       var ulTodos = $('.todo-list'); //extract DOM element with the class of todo from page
       ulTodos.html(htmlString); //take html string and push it inot html element
+    
+      $('.toggle').change(function(e){
+        var itemId = $(e.target).data("id"); //have jQuery extract data-id
+        console.log(itemId); //click handler to log message to the console when checkbox is toggled
+      
+        var doneValue = Boolean($(e.target).is(':checked'));
+        console.log("done:", doneValue);
+
+        $.post("/tasks/" + itemId, { //save checked/unchecked boxes in our database
+          _method: "PUT",
+          task: {
+            done: doneValue
+          }
+        });
+
+      });
+
     });
   });
 </script>
