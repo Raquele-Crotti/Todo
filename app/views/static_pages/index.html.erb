@@ -18,7 +18,14 @@
     $('#new-form').submit(function(event) {
       event.preventDefault();
       var textbox = $('.new-todo'); //use jQuery with the class of new-todo to extract value from textbox. Check value using jQuery's val method.
-      console.log("Task: ", textbox.val());
+      var payload = { //build a variable to contain the payload of the request that we will be making. 
+        task: {
+          title: textbox.val()
+        }
+      };
+      $.post("/tasks", payload).success(function(data) {
+        console.log("Successful HTTP Request");
+      })
     });
 
 
