@@ -61,6 +61,7 @@ ClientsController.prototype.index = function(){
         var ulTodos = $('.todo-list'); //have jQuery extract item from the page using append method to append HTML element to the bottom of the list.
         ulTodos.append(htmlString);
         $('toggle').click(toggleTask); //set up click handler to sync to API after we push new items onto the page.
+        $('.new-todo').val(''); //change data inside textbox to be blank string after we get successful response from server
       })
     });
 
