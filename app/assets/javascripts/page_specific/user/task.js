@@ -1,5 +1,6 @@
 var TasksController = Paloma.controller('Tasks');
-ClientsController.prototype.index = function(){
+
+TasksController.prototype.index = function(){
     // The taskHtml method takes in a JavaScript representation
     // of the task and produces an HTML representation using
     // <li> tags

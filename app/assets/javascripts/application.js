@@ -17,3 +17,4 @@
 //= require_tree .
 //= require paloma
 //= require initializer
+//= require page_specific/user/tasks
