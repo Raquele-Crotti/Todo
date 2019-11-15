@@ -37,6 +37,7 @@ body {
   font-weight: 300;
 }
 
+
 button,
 input[type="checkbox"] {
   outline: none;
@@ -140,7 +141,7 @@ label[for='toggle-all'] {
 }
 
 .toggle-all:checked:before {
-  color: #737373;
+  color: #000000;
 }
 
 .todo-list {

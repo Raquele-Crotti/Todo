@@ -9,12 +9,13 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//
+
 //= require rails-ujs
 //= require activestorage
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require paloma
 //= require initializer
-//= require page_specific/user/tasks
+//= require tasks
+//= require_tree .
+
