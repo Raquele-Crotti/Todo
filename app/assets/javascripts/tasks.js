@@ -30,6 +30,7 @@ $(function() {
       task: {
         done: doneValue
       }
+      
     }).success(function(data) {
       var liHtml = taskHtml(data);
       var $li = $("#listItem-" + data.id);
